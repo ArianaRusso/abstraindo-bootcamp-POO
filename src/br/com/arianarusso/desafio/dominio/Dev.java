@@ -1,5 +1,7 @@
 package br.com.arianarusso.desafio.dominio;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -14,7 +16,6 @@ public class Dev {
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
         bootcamp.getDevsInscritos().add(this);
     }
-
     public void progredir(){
         Optional<Conteudo> conteudo= this.conteudosInscritos.stream().findFirst();
         if(conteudo.isPresent()){
@@ -24,13 +25,13 @@ public class Dev {
             System.err.println("Você não esta matriculado em nenhum conteudo");
         }
     }
-
     public double calcularTotalXP(){
         return this.conteudosConcluidos
                 .stream()
                 .mapToDouble(Conteudo::calcularXP)
                 .sum();
     }
+
 
     public String getNome() {
         return nome;
@@ -68,5 +69,14 @@ public class Dev {
     @Override
     public int hashCode() {
         return Objects.hash(nome, conteudosInscritos, conteudosConcluidos);
+    }
+
+    @Override
+    public String toString() {
+        return "Dev{" +
+                "nome='" + nome + '\'' +
+                ", conteudosInscritos=" + conteudosInscritos +
+                ", conteudosConcluidos=" + conteudosConcluidos +
+                '}';
     }
 }

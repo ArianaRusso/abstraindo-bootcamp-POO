@@ -1,13 +1,9 @@
 package br.com.arianarusso.desafio.dominio;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Bootcamp {
-
     private String nome;
     private String descricao;
     private final LocalDate dataInicial= LocalDate.now();
@@ -15,6 +11,22 @@ public class Bootcamp {
     private Set<Dev> devsInscritos= new HashSet<>();
     private Set<Conteudo> conteudos= new LinkedHashSet<>();
 
+    public Set<Dev> exibirDevsIncritos(){
+        return this.devsInscritos;
+    }
+
+    public List<Dev> findDevByName(String name){
+        List<Dev> devsAchados= new LinkedList<>();
+
+        Iterator<Dev> iterator= devsInscritos.iterator();
+        while (iterator.hasNext()){
+            Dev next= iterator.next();
+            if(next.getNome().contains(name)){
+                devsAchados.add(next);
+            }
+        }
+        return devsAchados;
+    }
     public String getNome() {
         return nome;
     }
